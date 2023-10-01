@@ -11,10 +11,16 @@ async function getParticipants() {
     return prisma.participant.findMany();
 }
 
+async function getParticipantById(participantId: number) {
+    return prisma.participant.findUnique({
+        where: { id: participantId }
+    });
+}
 
 const participantRepository = {
     postParticipant,
     getParticipants,
+    getParticipantById
 }
 
 export default participantRepository;

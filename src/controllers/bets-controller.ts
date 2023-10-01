@@ -12,6 +12,7 @@ export async function postBet(req: Request, res: Response) {
 
         return res.status(httpStatus.OK).send(bet);
     } catch (error) {
-        console.log(error);
+        if (error.name === "LowBalance") return res.status(httpStatus.BAD_REQUEST).send(error.message);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }

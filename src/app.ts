@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import { participantsRouter } from "./routers/participants-router";
 import { gamesRouter } from "./routers/game-router";
 import { betsRouter } from "./routers/bet-router";
+import { handleErrors } from "./middlewares/error-handling-middleware";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app
     .use("/participants", participantsRouter)
     .use("/games", gamesRouter)
     .use("/bets", betsRouter)
+    .use(handleErrors);
 
 const PORT = 5000 || process.env.PORT;
 app.listen(PORT, () => console.log(`Running server on port ${PORT}`));
