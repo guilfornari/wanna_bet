@@ -20,10 +20,19 @@ async function getGameBets(gameId: number) {
     });
 }
 
+async function getGameById(gameId: number) {
+    return prisma.game.findUnique({
+        where: {
+            id: gameId
+        }
+    });
+}
+
 const gameRepository = {
     postGame,
     getGames,
-    getGameBets
+    getGameBets,
+    getGameById
 }
 
 export default gameRepository;
