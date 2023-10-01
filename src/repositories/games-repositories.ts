@@ -1,5 +1,5 @@
 import prisma from "../database";
-import { postGameParams } from "../protocols";
+import { finishGameParams, postGameParams } from "../protocols";
 
 async function postGame(postGame: postGameParams) {
     return prisma.game.create({
@@ -28,11 +28,22 @@ async function getGameById(gameId: number) {
     });
 }
 
+async function finishGame(gameId: number, finishGame: finishGameParams) {
+    return prisma.game.update({
+        where: { id: gameId },
+        data: {
+            ...finishGame,
+            isFinished: true
+        }
+    });
+}
+
 const gameRepository = {
     postGame,
     getGames,
     getGameBets,
-    getGameById
+    getGameById,
+    finishGame
 }
 
 export default gameRepository;
