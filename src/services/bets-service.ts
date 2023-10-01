@@ -15,6 +15,10 @@ async function postBet(postBet: postBetParams) {
     if (isFinished === true) throw gameFinishedError();
 
     const bet = await betRepository.postBet(postBet);
+
+    const newBalance = balance - amountBet;
+    await participantRepository.upDateParticipantsBalance(participantId, newBalance);
+
     return bet;
 }
 
