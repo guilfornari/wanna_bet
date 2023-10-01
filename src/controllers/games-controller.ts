@@ -21,3 +21,14 @@ export async function getGames(req: Request, res: Response) {
         console.log(error);
     }
 }
+
+export async function getGameBets(req: Request, res: Response) {
+    const { id } = req.params;
+    const gameId = Number(id);
+    try {
+        const gameBets = await gameService.getGameBets(gameId);
+        return res.status(httpStatus.OK).send(gameBets);
+    } catch (error) {
+        console.log(error);
+    }
+}

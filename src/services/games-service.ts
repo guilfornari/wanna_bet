@@ -10,9 +10,14 @@ async function getGames() {
     return await gameRepository.getGames();
 }
 
+async function getGameBets(gameId: number) {
+    return await gameRepository.getGameBets(gameId);
+}
+
 const gameService = {
     postGame,
     getGames,
+    getGameBets,
 }
 
 export default gameService;
