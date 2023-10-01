@@ -5,10 +5,15 @@ async function postGame(postGame: postGameParams) {
     return prisma.game.create({
         data: postGame
     });
-};
+}
+
+async function getGames() {
+    return prisma.game.findMany();
+}
 
 const gameRepository = {
-    postGame
-};
+    postGame,
+    getGames
+}
 
 export default gameRepository;
