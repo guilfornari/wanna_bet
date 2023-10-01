@@ -9,7 +9,7 @@ export async function postParticipant(req: Request, res: Response) {
         const participant = await participantService.postParticipant(postParticipant);
         return res.status(httpStatus.CREATED).send(participant);
     } catch (error) {
-        console.log(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -18,6 +18,6 @@ export async function getParticipants(req: Request, res: Response) {
         const participants = await participantService.getParticipants();
         return res.status(httpStatus.OK).send(participants);
     } catch (error) {
-        console.log(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }

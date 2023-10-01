@@ -9,7 +9,7 @@ export async function postGame(req: Request, res: Response) {
         const game = await gameService.postGame(postGame);
         return res.status(httpStatus.CREATED).send(game);
     } catch (error) {
-        console.log(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -18,7 +18,7 @@ export async function getGames(req: Request, res: Response) {
         const game = await gameService.getGames();
         return res.status(httpStatus.OK).send(game);
     } catch (error) {
-        console.log(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -29,7 +29,7 @@ export async function getGameBets(req: Request, res: Response) {
         const gameBets = await gameService.getGameBets(gameId);
         return res.status(httpStatus.OK).send(gameBets);
     } catch (error) {
-        console.log(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -41,6 +41,7 @@ export async function finishGame(req: Request, res: Response) {
         const finishedGame = await gameService.finishGame(gameId, finishGame);
         return res.status(httpStatus.OK).send(finishedGame);
     } catch (error) {
-        console.log(error);
+        if (error.name === "GameFinished") return res.status(httpStatus.CONFLICT).send(error.message);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }

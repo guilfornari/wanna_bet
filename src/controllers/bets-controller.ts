@@ -11,6 +11,6 @@ export async function postBet(req: Request, res: Response) {
     } catch (error) {
         if (error.name === "LowBalance") return res.status(httpStatus.BAD_REQUEST).send(error.message);
         if (error.name === "GameFinished") return res.status(httpStatus.BAD_REQUEST).send(error.message);
-        return res.sendStatus(httpStatus.BAD_REQUEST);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }

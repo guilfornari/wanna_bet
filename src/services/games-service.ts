@@ -1,3 +1,4 @@
+import { gameFinishedError } from "../errors/game-finished-error";
 import { finishGameParams, postGameParams } from "../protocols";
 import gameRepository from "../repositories/games-repositories";
 
@@ -15,6 +16,10 @@ async function getGameBets(gameId: number) {
 }
 
 async function finishGame(gameId: number, finishGame: finishGameParams) {
+
+    const { isFinished } = await gameRepository.getGameById(gameId);
+    if (isFinished === true) throw gameFinishedError();
+
     return await gameRepository.finishGame(gameId, finishGame);
 }
 
