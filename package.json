@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/app.ts",
-    "dev": "nodemon ./src/app.ts"
+    "dev": "nodemon ./src/app.ts",
+    "fix:test": "npx jest --coverage --runInBand --coverageReporters=json-summary --coverageDirectory=coverage --collectCoverageFrom='**/*.ts"
   },
   "keywords": [],
   "author": "",
